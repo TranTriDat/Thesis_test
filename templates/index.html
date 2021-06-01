@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<title>Image Processing</title>
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+    let value = "";
+
+    $.get("/video_feed_1",function(data){
+      value += data;
+      document.getElementById("ss").innerHTML = value;
+      let i =0;
+      let videoSource = value;
+      videoSource = value.split(",");
+      // alert(videoSource);
+      const videoCount = videoSource.length;
+      const element = document.getElementById("ss");
+      var a = new Array();
+      for (const j of videoSource){
+        tmp = 'static/video/' + j
+        a.push(tmp);
+        // alert(a);
+      }
+
+      // a.push(videoSource);
+
+      function videoPlay(videoNum) {
+        element.setAttribute("src", a[videoNum]);
+        element.autoplay = true;
+        element.load();
+        element.play();
+      }
+      document.getElementById('ss').addEventListener('ended', myHandler, false);
+      videoPlay(0); // play the video
+
+      function myHandler() {
+        i++;
+        if (i == videoCount) {
+            i = 0;
+            videoPlay(i);
+        } else {
+            videoPlay(i);
+        }
+      }
+        // document.getElementById("demo1").innerHTML=window.value;
+    });
+    </script>
+    <style>
+      body {
+        font-family: monospace;
+      }
+      /* img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 35%
+      } */
+
+      #left{
+        float:right;
+        /* width: 50%; */
+      }
+      #right{
+        float:right;
+        width: 50%;
+      }
+
+      #bottom{
+        position: absolute;
+        float: right;
+        bottom: 0;
+      }
+    </style>
+    <script>
+      function refreshPage(){
+        window.location.reload();
+      }
+    </script>
+
+    <script>
+    function deleteRow(tableID)  {
+        var table = document.getElementById(tableID).tBodies[0];
+        var rowCount = table.rows.length;
+
+        // var i=1 to start after header
+        for(var i=1; i<rowCount; i++) {
+            var row = table.rows[i];
+            // index of td contain checkbox is 8
+            var chkbox = row.cells[8].getElementsByTagName('input')[0];
+            if('checkbox' == chkbox.type && true == chkbox.checked) {
+                table.deleteRow(i);
+             }
+          }
+      }
+    </script>
+</head>
+<body>
+  <center>
+    <h1>Movie Trailers Management System</h1>
+
+    <!-- <form action = "/addrec" method = "POST">
+      <table>
+      <tr>
+          <td align="right"><input type = "submit" value = "+" /></td>
+        </tr>
+      </table>
+    </form> -->
+    <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-controls="collapseExample">
+    +
+    </button> -->
+
+    <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-controls="collapseExample1">
+    -
+    </button> -->
+    <!-- <div class="collapse" id="collapseExample1">
+
+        <form action="{{ url_for('delete') }}" method="POST">
+          <h3>Movie Information</h3>
+        <input type="text" placeholder="Enter Ads Name" name="ads_name" required>
+        <button type="submit" class="btn btn-primary"  onsubmit=""="refreshPage()">Submit</button>
+      </form>
+    </div> -->
+
+    <!-- <div class="collapse" id="collapseExample">
+
+        <form action="{{ url_for('add') }}" method="POST">
+          <h3>Movie Information</h3>
+        <input type="text" placeholder="Enter ID" name="ads_id" required> -->
+
+        <!-- <input type="text" placeholder="Enter Ads Name" name="ads_name" required> -->
+
+        <!-- <input type="text" placeholder="Enter Gender" name="ads_gender" required> -->
+
+        <!-- <input type="text" placeholder="Enter Age Required" name="ads_age_from" required> -->
+
+        <!-- <input type="text" placeholder="Enter Type" name="ads_type"> -->
+
+        <!-- <input type="text" placeholder="Enter Time Start" name="ads_time_from"> -->
+
+        <!-- <input type="text" placeholder="Enter Time Expire" name="ads_time_to"> -->
+
+        <!-- <input type="text" placeholder="Enter Status" required name="ads_status">
+
+        <button type="submit" class="btn btn-primary"  onsubmit="refreshPage()">Submit</button>
+      </form> -->
+
+    <!-- </div> -->
+
+    <h1>
+
+      <table border = 1>
+        <thead>
+           <td>ID</td>
+           <td>Ads Name</td>
+           <td>Ads Gender</td>
+           <td>Ads Age From</td>
+           <td>Ads Type</td>
+           <td>Ads Time From</td>
+           <td>Ads Time To</td>
+           <td>Ads Status</td>
+
+
+        </thead>
+
+        {% for row in rows %}
+           <tr>
+              <td>{{row["ads_id"]}}</td>
+              <td>{{row["ads_name"]}}</td>
+              <td> {{ row["ads_gender"]}}</td>
+              <td>{{row['ads_age_from']}}</td>
+              <td>{{row['ads_type']}}</td>
+              <td>{{row['ads_time_from']}}</td>
+              <td>{{row['ads_time_to']}}</td>
+              <td>{{row['ads_status']}}</td>
+              <td><a href="/dele/{{row.ads_id}}">
+                Delete</a></td>
+            
+
+
+           </tr>
+        {% endfor %}
+     </table>
+
+     <a href = "/">Go back to home page</a>
+     <!-- <form action = "/addrec" method = "POST">
+
+     <table>
+      <tr>
+      <td></td>
+         <td align="right"><input type = "submit" value = "submit" /></td>
+       </tr>
+
+     </table>
+   </form> -->
+
+    </h1>
+  </center>
+
+  <!-- <form action = "/addrec" method = "POST">
+
+  <table>
+   <tr>
+      <td align="right"><input type = "submit" value = "Add" /></td>
+    </tr>
+
+  </table>
+</form> -->
+
+
+<!-- <form action = "/delrec" method = "POST"> -->
+
+<!-- <table>
+ <tr>
+    <td align="right"><input type = "submit" value = "Remove" /></td>
+  </tr>
+
+</table> -->
+
+<div class="row" id='right'>
+  <h2 class="mt-5">Movie Trailer</h2>
+  <video controls="controls" id="ss" width="854" height="480"></video>
+  <h2></h2>
+</div>
+
+<!-- </form> -->
+  </body>
+
+</html>

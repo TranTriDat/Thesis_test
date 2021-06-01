@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<title>Image Processing</title>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+<body>
+  <center>
+    <h1>Movie Trailers Management System</h1>
+
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-controls="collapseExample">
+    +
+    </button>
+
+    <div class="collapse" id="collapseExample">
+
+      <div class="container">
+        <form action="/add/" method="POST" role="form" >
+          <h3>Enter Movie Information</h3>
+        <div class="row">
+
+        <div class="col-1">
+        <input class="form-control" type="text" placeholder="ID" name="ads_id" required>
+        </div>
+
+        <div class="col-2">
+        <input class="form-control" type="text" placeholder="Name" name="ads_name" required>
+        </div>
+
+        <div class="col-2">
+        <input class="form-control" type="text" placeholder="Gender" name="ads_gender" required>
+        </div>
+
+        <div class="col-1">
+        <input class="form-control" type="text" placeholder="Age" name="ads_age_from" required>
+        </div>
+
+        <div class="col-1">
+        <input class="form-control" type="text" placeholder="Type" name="ads_type">
+        </div>
+
+        <div class="col-1">
+        <input class="form-control" type="text" placeholder="Start" name="ads_time_from">
+        </div>
+
+        <div class="col-1">
+        <input class="form-control" type="text" placeholder="End" name="ads_time_to">
+        </div>
+
+        <div class="col-1">
+        <input class="form-control" type="text" placeholder="State" required name="ads_status">
+        </div>
+
+        <div class="col-1">
+        <input class="form-control" type="text" placeholder="Path" required name="ads_path">
+        </div>
+      </div>
+      </form>
+    </div>
+    <input class="btn btn-primary" id="submit" type="submit" value="Submit">
+
+    </div>
+
+    <!-- <div class="table-responsive-sm"> -->
+      <table class="table table-info table-hover text-center " border = 1>
+        <thead>
+           <th scope="col"><p class="fs-1 text-center">ID</p></th>
+           <th scope="col"><p class="fs-1 text-center">Ads Name</p></th>
+           <th scope="col"><p class="fs-1 text-center">Ads Gender</p></th>
+           <th scope="col"><p class="fs-1 text-center">Ads Age From</p></th>
+           <th scope="col"><p class="fs-1 text-center">Ads Type</p></th>
+           <th scope="col"><p class="fs-1 text-center">Ads Time From</p></th>
+           <th scope="col"><p class="fs-1 text-center">Ads Time To</p></th>
+           <th scope="col"><p class="fs-1 text-center">Ads Status</p></th>
+           <th scope="col"><p class="fs-1 text-center">Update Status</p></th>
+           <th scope="col"><p class="fs-1 text-center">Ads Path</p></th>
+           <th scope="col"><p class="fs-1 text-center">Update Path</p></th>
+           <th scope="col"><p class="fs-1 text-center">Delete Movie</p></th>
+
+
+           <!-- <th scope="col">Watching Trailer</th> -->
+
+        </thead>
+
+        {% for row in rows %}
+          <tbody>
+           <tr>
+              <th scope="row">{{row["ads_id"]}}</th>
+              <td>{{row["ads_name"]}}</td>
+              <td> {{ row["ads_gender"]}}</td>
+              <td>{{row['ads_age_from']}}</td>
+              <td>{{row['ads_type']}}</td>
+              <td>{{row['ads_time_from']}}</td>
+              <td>{{row['ads_time_to']}}</td>
+              <td>{{row['ads_status']}}</td>
+              <td>
+                <div class="col-xs-2">
+                  <form action="/update/{{row.ads_id}}" method="POST">
+                  <input class="form-control"  type="text" placeholder="Enter Status" required name="ads_status1">
+                  <input class="btn btn-primary" id="submit" type="submit" value="Submit">
+                  </form>
+              </div>
+              </td>
+              <td>{{row['ads_path']}}</td>
+              <td>
+                <div class="col-xs-2">
+                  <form action="/update_path/{{row.ads_id}}" method="POST">
+                  <input class="form-control"  type="text" placeholder="Enter Path" required name="ads_path1">
+                  <input class="btn btn-primary" id="submit" type="submit" value="Submit">
+                  </form>
+              </div>
+
+              </td>
+
+              <td><a href="/dele/{{row.ads_id}}" class="btn btn-danger btn-lg btn-block">
+                Delete</a></td>
+
+              <!-- <td>
+                  <input value={{row.ads_path}}>
+                  <iframe width="420" height="345" frameborder="0" allowfullscreen
+                  src="{{row['ads_path']}}">
+                    </iframe>
+              </td> -->
+
+
+           </tr>
+         </tbody>
+        {% endfor %}
+     </table>
+   <!-- </div> -->
+     <a href = "/">Go back to home page</a>
+
+  </center>
+
+  </body>
+
+</html>

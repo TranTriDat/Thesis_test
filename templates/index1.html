@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<title>Image Processing</title>
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+
+    let value = "";
+
+    $.get("/video_feed_2",function(data){
+      value += data;
+      document.getElementById("ss").innerHTML = value;
+      let i =0;
+      let videoSource = value;
+      videoSource = value.split(",");
+      // alert(videoSource);
+      const videoCount = videoSource.length;
+      const element = document.getElementById("ss");
+      var a = new Array();
+      for (const j of videoSource){
+        tmp = j
+        a.push(tmp);
+        // alert(a);
+      }
+      alert(a);
+      // var player, currentVideo = 0;
+      //
+      //   function onYouTubeIframeAPIReady() {
+      //     player = new YT.Player('ss', {
+      //         height: '854',
+      //         width: '480',
+      //         events: {
+      //             'onReady': onPlayerReady,
+      //             'onStateChange': onPlayerStateChange
+      //         }
+      //     });
+      // }
+      //
+      // function onPlayerReady(event) {
+      //     event.target.loadVideoById(videoIDs[currentVideoId]);
+      // }
+      //
+      // function onPlayerStateChange(event) {
+      //   if (event.data == YT.PlayerState.ENDED) {
+      //       currentVideo++;
+      //       if (currentVideo < a.length) {
+      //           alert(a[currentVideo])
+      //           player.loadVideoById(a[currentVideo]);
+      //       }
+      //   }
+      // }
+      // a.push(videoSource);
+
+      function videoPlay(videoNum) {
+        element.setAttribute("src", a[videoNum]);
+        element.autoplay = true;
+        element.load();
+        element.play();
+      }
+      document.getElementById('ss').addEventListener('ended', myHandler, false);
+      videoPlay(0); // play the video
+
+      function myHandler() {
+        i++;
+        if (i == videoCount) {
+            i = 0;
+            videoPlay(i);
+        } else {
+            videoPlay(i);
+        }
+      }
+        // document.getElementById("demo1").innerHTML=window.value;
+    });
+    </script>
+    <style>
+      body {
+        font-family: monospace;
+      }
+      /* img{
+        display: block;
+      	margin-left: auto;
+      	margin-right: auto;
+    	  width: 35%
+      } */
+
+      #left{
+        float:right;
+        /* width: 50%; */
+      }
+      #right{
+        float:right;
+        width: 50%;
+      }
+
+      #bottom{
+        position: absolute;
+        bottom: 0;
+      }
+    </style>
+</head>
+<body>
+      <!-- <div class="row" id='left'>
+        <h2 class="mt-5" align='right'>Live Streaming</h2>
+        <img src="{{ url_for('video_feed') }}" width="100%" align='left'>
+      </div> -->
+
+      <div id='ss'></id>
+      <script src="//www.youtube.com/iframe_api"></script>
+
+      <!-- <div class="row" id='ss'>
+        <h2 class="mt-5">Movie Trailer</h2> -->
+        <!-- <video autoplay controls="controls" id="ss" width="854" height="480"></video> -->
+        <!-- <iframe id="ss" width="854" height="480" frameborder="0" allowfullscreen autoplay
+              src = "">
+          </iframe> -->
+        <!-- <h2></h2>
+      </div> -->
+  </body>
+
+</html>

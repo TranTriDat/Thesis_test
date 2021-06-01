@@ -1,0 +1,33 @@
+<html>
+   <body>
+      <form action = "{{ url_for('add') }}" method = "POST">
+
+         <h3>Movie Information</h3>
+        Ads ID<br>
+         <input type = "text" name = "ads_id" required/></br>
+
+         Ads Name<br>
+         <input type="text" name="ads_name" required> <br>
+
+         Ads Gender<br>
+         <input type = "text" name = "ads_gender" required/><br>
+
+         Ads Age From<br>
+         <input type = "text" name = "ads_age_from" required/><br>
+
+         Ads Type<br>
+         <input type = "text" name = "ads_type" /><br>
+
+         Ads Time From<br>
+         <input type = "text" name = "ads_time_from" /><br>
+
+         Ads Time To<br>
+         <input type = "text" name = "ads_time_to" /><br>
+
+         <input type = "submit" value='submit'/><br>
+      </form>
+      <a href = "/">Go back to home page</a>
+      <!-- <input type="button" value="Go back!" onclick="history.back()"> -->
+
+   </body>
+</html>

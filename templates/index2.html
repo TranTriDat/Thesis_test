@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<title>Image Processing</title>
+<head>
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+
+    // var auto_refresh = setInterval(
+    // function (){
+    //   $('#video').load('#video');
+    // }, 3000);
+
+    // $('#left').load(document.location + "#left");
+    // let value = "";
+    // // function reload() {
+    // //   // document.location.reload();
+    // //   // $('#left').html($()).
+    // //   document.getElementById('left').location.load();
+    // // }
+    // //
+    // // setTimeout(reload, 10000);
+    //
+    // // $.get("/video_feed_2",function(data){
+    // //   value += data;
+    // //   document.getElementById("ss").innerHTML = value;
+    // //   let i =0;
+    // //   let videoSource = value;
+    // //   videoSource = value.split(",");
+    // //   // alert(videoSource);
+    // //   const videoCount = videoSource.length;
+    // //   const element = document.getElementById("ss");
+    // //   var a = new Array();
+    // //   for (const j of videoSource){
+    // //     tmp = j
+    // //     a.push(tmp);
+    // //     // alert(a);
+    // //   }
+    //   // alert(a);
+    //   // alert(a.length);
+    //   // alert(a[35]);
+    //
+    //   a.push(videoSource);
+    //
+    //   // for(i=0; i <videoSource.length;i++){
+    //       // alert(videoSource[i]);
+    //   // document.getElementById('ss').innerHTML ='<iframe src="https://youtube.com/embed/videoseries'+'?playlist='+ a+'?autoplay=1" width="854" height="480" frameborder="0" encrypted-media"/>';
+    //   // document.getElementById('ss').innerHTML ='<iframe src="https://youtube.com/embed/'+a[0]+'?playlist='+ a+'?autoplay=1" width="854" height="480" frameborder="0" encrypted-media"/>';
+    //   // }
+    //   // setTimeout(reload, 50000);
+    //
+    //   function videoPlay(videoNum) {
+    //     element.setAttribute("src", a[videoNum]);
+    //     element.autoplay = true;
+    //     element.load();
+    //     element.play();
+    //   }
+    //   document.getElementById('ss').addEventListener('ended', myHandler, false);
+    //   videoPlay(0); // play the video
+    //
+    //   function myHandler() {
+    //     i++;
+    //     if (i == videoCount) {
+    //         i = 0;
+    //         videoPlay(i);
+    //     } else {
+    //         videoPlay(i);
+    //     }
+    //   }
+    //     // document.getElementById("demo1").innerHTML=window.value;
+    // });
+
+    // $("#")
+      src="https://youtube.com/embed/videoseries?playlist='+ {{ url_for("youtube_feed") }}+'?autoplay=1";
+      alert(src);
+    </script>
+    <style>
+      body {
+        font-family: monospace;
+      }
+      /* img{
+        display: block;
+      	margin-left: auto;
+      	margin-right: auto;
+    	  width: 35%
+      } */
+
+      #left{
+        float:left;
+        /* width: 50%; */
+      }
+      #right{
+        float:right;
+        /* width: 50%; */
+      }
+
+      #bottom{
+        position: absolute;
+        bottom: 0;
+      }
+
+
+    </style>
+</head>
+<body>
+<div class="row" id='right'>
+    <h2 class="mt-5" align='right'>Live Streaming</h2>
+    <img id='video' src="{{ url_for('video_feed') }}" width="100%" align='left'>
+</div>
+
+<div class="row" id='left'>
+    <h2 class="mt-5" align='left'>Movie Trailer</h2>
+    <div id='ss'>
+      <!-- <img id="video" src="https://youtube.com/embed/videoseries'+'?playlist='+ {{ url_for('youtube_feed') }}+'?autoplay=1" width="854" height="480" frameborder="0" encrypted-media/> -->
+      <p>{{url_for('youtube_feed')}}</p>
+        <iframe src="https://youtube.com/embed/videoseries'+'?playlist='+ {{ url_for('youtube_feed') }}+'?autoplay=1" width="854" height="480" frameborder="0" encrypted-media/>
+    </div>
+</div>
+</body>
+
+</html>
